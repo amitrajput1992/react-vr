@@ -10,7 +10,7 @@ previous: reactnative
 
 React VR makes use of a Flexbox style layout algorithm to automatically position components and their children.
 
-The library we use, [CSSLayout](https://github.com/facebook/css-layout), tries to follows the web implementation of flexbox as much as possible. CSSLayout does make changes to the default properties, and [these changes](http://jsfiddle.net/vjeux/y11txxv9/) can be forked to allow testing in a browser environment.
+The library we use, [Yoga](https://github.com/facebook/yoga), tries to follows the web implementation of flexbox as much as possible. Yoga does make changes to the default properties, and [these changes](http://jsfiddle.net/vjeux/y11txxv9/) can be forked to allow testing in a browser environment.
 
 #### Layout Sample
 
@@ -19,8 +19,8 @@ In most cases, children are arranged vertically in a `'column'` or horizontally 
 Here are some of the more common attributes:
 
 * `flexDirection` - Can be `column` or `row`.
-* `justifyContent` - Can be `flex-start`, `space-around`, `center`, `space-between` or `flex-end`.
-* `alignItems` - Can be `stretch`, `flex-start`, `center` or `flex-end`.
+* `justifyContent` - Can be `flex-start`, `space-around`, `center`, `space-between`, or `flex-end`.
+* `alignItems` - Can be `stretch`, `flex-start`, `center`, or `flex-end`.
 * `margin` - specifies space around the item.
 
 The behavior of these and other layout attributes is demonstrated by the *LayoutSample* included
