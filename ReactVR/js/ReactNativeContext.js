@@ -18,6 +18,7 @@ import GlyphTextures from './Modules/GlyphTextures';
 import History from './Modules/History';
 import LinkingManager from './Modules/LinkingManager';
 import Location from './Modules/Location';
+import LocationObserver from './Modules/LocationObserver';
 import Networking from './Modules/Networking';
 import {RCTResourceManager} from './Utils/RCTResourceManager';
 import {RCTInputControls} from './Utils/RCTInputControls';
@@ -194,6 +195,7 @@ export class ReactNativeContext {
     this.registerModule(new Networking(this));
     this.registerModule(new LinkingManager(this));
     this.registerModule(new Location(this));
+    this.registerModule(new LocationObserver(this));
     this.registerModule(this.Timing);
     this.registerModule(this.VideoModule);
     this.registerModule(this.AudioModule);
@@ -266,8 +268,10 @@ export class ReactNativeContext {
    * @param props - props that is posted to the registered module
    * @return returns the tag of the rootview
    */
-  createRootView(module: string, props: {[prop: string]: any}) {
+  createRootView(module: string, props: {[prop: string]: any}, container?: SceneGraphNode) {
     const tag = this.currentRootTag;
+    // TODO: Root tags should be sourced from UIManager instead, which
+    // is aware of availability.
     this.currentRootTag += ROOT_VIEW_INCREMENT;
     this.bridge.postMessage(
       JSON.stringify({
@@ -278,8 +282,10 @@ export class ReactNativeContext {
       })
     );
     this._moduleForTag[tag] = module;
-    this._cameraParentFromTag[tag] = new THREE.Object3D();
-    this.UIManager.createRootView(tag);
+    if (!container) {
+      this._cameraParentFromTag[tag] = new THREE.Object3D();
+    }
+    this.UIManager.createRootView(tag, container);
     return tag;
   }
 

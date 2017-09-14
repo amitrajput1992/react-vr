@@ -48,13 +48,13 @@ const apis = [
   path.join(rn, 'Libraries/Animated/src/Easing.js'),
   '../Libraries/VRModules/ExternalAssets.js',
   // '../Libraries/VRModules/GlyphTextures.js', // No jsdocs
+  path.join(rn, 'Libraries/Geolocation/Geolocation.js'),
   '../Libraries/VRModules/History.js',
   path.join(rn, 'Libraries/Linking/Linking.js'),
   '../Libraries/VRModules/Location.js',
   //'../Libraries/VRModules/ReactVRConstants.js', // No jsdocs
   path.join(rn, 'Libraries/StyleSheet/StyleSheet.js'),
   '../Libraries/Video/MediaPlayerState.js',
-  path.join(rn, 'Libraries/Renderer/src/renderers/native/NativeMethodsMixin.js'),
   '../Libraries/VRModules/RCTVideoModule.js',
   '../Libraries/Utilities/VrHeadModel.js',
   '../Libraries/Utilities/VrSoundEffects.js',
@@ -76,8 +76,7 @@ const stylesForEmbed = [
   path.join(rn, 'Libraries/Text/TextStylePropTypes.js'),
 ];
 
-// Uncomment when we upgrade to React 16
-//const viewPropTypes = path.join(rn, 'Libraries/Components/View/ViewPropTypes.js');
+const viewPropTypes = path.join(rn, 'Libraries/Components/View/ViewPropTypes.js');
 
 module.exports = {
   coreComponents,
@@ -85,5 +84,5 @@ module.exports = {
   apis,
   stylesWithPermalink,
   stylesForEmbed,
-  //viewPropTypes,
+  viewPropTypes,
 };

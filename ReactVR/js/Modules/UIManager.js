@@ -459,10 +459,10 @@ export default class UIManager extends Module {
    * root view tags IDs are always (multiples of ten + one)
    * @param tag - react tag to use
    */
-  createRootView(tag: number) {
+  createRootView(tag: number, container?: SceneGraphNode) {
     // create a View with defaults
     this._rootViews[String(tag)] = this.createView(tag, 'RCTView', tag, {});
-    this._guiSys.add(this._rootViews[String(tag)].view);
+    this._guiSys.add(this._rootViews[String(tag)].view, container);
   }
 
   /**
@@ -711,7 +711,8 @@ export default class UIManager extends Module {
         view.YGNode.getComputedTop() - view.YGNode.getComputedHeight() * view.style.layoutOrigin[1];
       view = view.getParent();
     }
-    this._rnctx.invokeCallback(callback, [x, y, w, h]);
+    // [x, y, w, h, left, top]
+    this._rnctx.invokeCallback(callback, [0, 0, w, h, x, y]);
   }
 
   /**
