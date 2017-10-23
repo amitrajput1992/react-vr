@@ -12,31 +12,19 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import {combineReducers} from 'redux';
-import board from './board';
-import scores from './scores';
-import {scorer} from './validate';
-
-const reducers = combineReducers({
-  board,
-  scores,
-});
-
-const app = (state, action) => {
-  switch (action.type) {
-    case 'SYNC_STATE':
-      return action.state;
-    case 'HIDE':
-      const value = state.board[action.square.row][action.square.column];
-      if (scorer(value, state.scores)) {
-        return state; // Don't hide scored squares.
-      }
-  }
-
-  if (action.type === 'SYNC_STATE') {
-    return {...action.state};
-  }
-  return reducers(state, action);
+// Hack for react-dom to work, otherwise the console spits out
+// a `process is not defined error`, in what looks like react's initialization:
+// if (process.env.NODE_ENV === 'production') {
+//   module.exports = require('./cjs/react.production.min.js');
+// } else {
+//   module.exports = require('./cjs/react.development.js');
+// }
+window.process = {
+  env: {
+    NODE_ENV: 'production',
+  },
 };
 
-export default app;
+if (__DEV__) {
+  window.process.env.NODE_ENV = 'development';
+}
